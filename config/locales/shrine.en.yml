@@ -1,0 +1,5 @@
+en:
+  shrine:
+    errors:
+      mime_type: "allowed file types are %{whitelist}"
+      max_size: "maximum file size is %{max} MB"
