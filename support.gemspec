@@ -21,17 +21,17 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails", "~> 6.1.3", ">= 6.1.3.1"
+  spec.add_dependency "rails", "~> 7.0.0"
 
   #uploadable sub module
-  spec.add_dependency "shrine", "~> 3.3.0"
-  spec.add_dependency "ranked-model", "~> 0.4.7" # ordering of upload records
-  spec.add_dependency "marcel", "~> 1.0" # mime-type determination
+  spec.add_dependency "shrine", "~> 3.4.0"
+  spec.add_dependency "ranked-model", "~> 0.4.8" # ordering of upload records
+  spec.add_dependency "marcel", "~> 1.0.2" # mime-type determination
   spec.add_dependency "fastimage", "~> 2.2.3" # mime-type determination
-  spec.add_dependency "image_processing", "~> 1.12" # processing wrapper for minimagick/vips
-  spec.add_dependency "shrine-mongoid", "~> 1.0"
+  spec.add_dependency "image_processing", "~> 1.2" # processing wrapper for minimagick/vips
+  # spec.add_dependency "shrine-mongoid", "~> 1.0"
 
-  spec.add_dependency "roo", "~> 2.8.0"
+  spec.add_dependency "roo", "~> 2.9.0"
   spec.add_dependency 'roo-xls'
   spec.add_dependency 'activerecord-import'
   spec.add_dependency 'aasm'

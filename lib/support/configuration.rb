@@ -92,41 +92,41 @@ module Support
             yield self
           end
 
-          def uploader context = nil
+          def uploader context = nil, &block
             if block_given?
-              @@uploader_proc = Proc.new
+              @@uploader_proc = block
             else
               @@uploader_proc.call(context)
             end
           end
 
-          def can_be_read_by uploader = nil, upload = nil, uploadable = nil,  context= nil
+          def can_be_read_by uploader = nil, upload = nil, uploadable = nil,  context= nil, &block
             if block_given?
-              @@can_be_read_by_proc = Proc.new
+              @@can_be_read_by_proc = block
             else
               @@can_be_read_by_proc.call(uploader, uploadable, upload, context)
             end
           end
 
-          def can_be_created_by uploader = nil, upload = nil, uploadable = nil, context= nil
+          def can_be_created_by uploader = nil, upload = nil, uploadable = nil, context= nil, &block
             if block_given?
-              @@can_be_created_by_proc = Proc.new
+              @@can_be_created_by_proc = block
             else
               @@can_be_created_by_proc.call(uploader, uploadable, upload, context)
             end
           end
 
-          def can_be_edited_by uploader = nil, upload = nil, uploadable = nil, context= nil
+          def can_be_edited_by uploader = nil, upload = nil, uploadable = nil, context= nil, &block
             if block_given?
-              @@can_be_edited_by_proc = Proc.new
+              @@can_be_edited_by_proc = block
             else
               @@can_be_edited_by_proc.call(uploader, uploadable, upload, context)
             end
           end
 
-          def can_be_deleted_by uploader = nil, upload = nil, uploadable = nil, context= nil
+          def can_be_deleted_by uploader = nil, upload = nil, uploadable = nil, context= nil, &block
             if block_given?
-              @@can_be_deleted_by_proc = Proc.new
+              @@can_be_deleted_by_proc = block
             else
               @@can_be_deleted_by_proc.call(uploader, uploadable, upload = nil, context)
             end

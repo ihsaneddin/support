@@ -58,6 +58,7 @@ Support.uploadable.setup do |config|
     shrine.plugin :backgrounding # process in background job
     shrine.plugin :upload_endpoint # endpoint for XHR uploads
     # shrine.plugin :hooks # callbacks
+    # Shrine.plugin :mongoid
   end
 
   #access configuration for endpoints and controllers of uploads
