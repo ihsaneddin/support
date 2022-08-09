@@ -126,7 +126,7 @@ module Support
               unless self.option_information[:errors].is_a? Array
                 self.option_information[:errors] = []
               end
-              self.option_information[:errors] << { attributes: parsed_attr, message: record.errors.messages, row_number: row_number }
+              self.option_information[:errors] << { original_attributes: attr, attributes: parsed_attr, message: record.errors.messages, row_number: row_number }
             else
               configuration_of :after_import, record, parsed_attr, attr
               res << record
@@ -136,7 +136,7 @@ module Support
             unless self.option_information[:errors].is_a? Array
               self.option_information[:errors] = []
             end
-            self.option_information[:errors] << { attributes: attr, message: e.message }
+            self.option_information[:errors] << { original_attributes: attr, attributes: parsed_attr, message: e.message, row_number: row_number }
           end
         end
         res
@@ -167,21 +167,22 @@ module Support
       end
 
       def eligible_for_import?
-        upload && upload.file.present? and context_class.present?
+        upload && upload.file.present? && upload.file.exists? && context_class.present?
       end
 
       def open_spreadsheet
         if upload
-          document = upload
-          case document.file.try(:extension)
+          document = upload.file
+          path = document.storage.path(document.id)
+          case document.try(:extension)
           when "xlsx"
-            spreadsheet = Roo::Spreadsheet.open(document.file.url, extension: document.file.extension)
+            spreadsheet = Roo::Spreadsheet.open(path, extension: document.extension)
           when "xls"
-            spreadsheet = Roo::Spreadsheet.open(document.file.url, extension: document.file.extension)
+            spreadsheet = Roo::Spreadsheet.open(path, extension: document.extension)
           when "csv"
-            spreadsheet = Roo::CSV.new(document.file.url, extension: :csv)
+            spreadsheet = Roo::CSV.new(path, extension: :csv)
           else
-            raise "Unknown file type: #{document.file.try :filename}"
+            raise "Unknown file type: #{document.try :original_filename}"
           end
           if block_given?
             yield(spreadsheet)

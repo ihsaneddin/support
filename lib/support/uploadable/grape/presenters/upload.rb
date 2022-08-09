@@ -15,6 +15,9 @@ module Support
               res.file_url
             end
           end
+          expose :original_file_name do |res|
+            res.file.try :original_filename
+          end
           expose :metadata
           expose :file_data do |res|
             JSON.parse(res.file_data) rescue {}

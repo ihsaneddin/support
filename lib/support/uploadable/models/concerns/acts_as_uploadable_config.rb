@@ -11,7 +11,7 @@ module Support
           def initialize **args
             default_args = {
               belongs_to_owner: true,
-              field: :file,
+              fieldname: :file,
               validations: {
                 presence: false,
                 max_file_size: Support.uploadable.max_file_size,
@@ -29,7 +29,7 @@ module Support
             end
           end
 
-          def merge! **args
+          def merge! args
             args.each do |key,val|
               if respond_to?("#{key}=")
                 send("#{key}=", val)
