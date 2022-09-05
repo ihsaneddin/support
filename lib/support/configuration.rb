@@ -76,16 +76,16 @@ module Support
         @@uploader_proc = -> (context) { context.current_user }
 
         mattr_accessor :can_be_read_by_proc
-        @@can_be_read_by_proc = -> (uploader_proc) { true }
+        @@can_be_read_by_proc = -> (uploader, uploadable, upload, context) { true }
 
         mattr_accessor :can_be_created_by_proc
-        @@can_be_created_by_proc = -> (uploader_proc) { true }
+        @@can_be_created_by_proc = -> (uploader, uploadable, upload, context) { true }
 
         mattr_accessor :can_be_edited_by_proc
-        @@can_be_edited_by_proc = -> (uploader_proc) { true }
+        @@can_be_edited_by_proc = -> (uploader, uploadable, upload, context) { true }
 
         mattr_accessor :can_be_deleted_by_proc
-        @@can_be_deleted_by_proc = -> (uploader_proc) { true }
+        @@can_be_deleted_by_proc = -> (uploader, uploadable, upload, context) { true }
 
         class << self
           def setup &block

@@ -40,6 +40,18 @@ module Support
             I18n.t *args
           end
 
+          def uploadable
+            if uploadable_class
+              @uploadable ||= uploadable_class.find(params[:uploadable_id])
+            end
+          end
+
+          def uploadable_class
+            if params[:uploadable]
+              params[:uploadable].to_s.classify.constantize rescue error!({details: "Uploadable class Not Found!"}, 404)
+            end
+          end
+
         end
       end
     end

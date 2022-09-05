@@ -5,17 +5,17 @@ module Support
   module Uploadable
     module Grape
       module Services
-        class Uploads < Base
+        class UploadableUploads < Base
 
           helpers Support::Uploadable::Grape::Helpers::Shared
 
           fetch_resource_and_collection! do
             model_klass "Support::Uploadable::Upload"
-            # query_scope -> (query) { query.where(uploadable: uploadable) }
-            # query_includes :uploadable
-            # got_resource_callback proc { |resource|
-            #   resource.uploadable = uploadable
-            # }
+            query_scope -> (query) { query.where(uploadable: uploadable) }
+            query_includes :uploadable
+            got_resource_callback proc { |resource|
+              resource.uploadable = uploadable
+            }
             attributes do
               optional :name, type: String
               optional :file, type: File
@@ -26,7 +26,7 @@ module Support
 
           set_presenter "Support::Uploadable::Grape::Presenters::Upload"
 
-          resources "uploads" do
+          resources ":uploadable/:uploadable_id/uploads" do
 
             desc "Get uploads"
             get "" do
@@ -43,9 +43,7 @@ module Support
                 standard_validation_error(details: @upload.errors)
               end
             end
-          end
 
-          resources "upload" do
             desc "Update upload"
             put ':id' do
               upload_can_be_edited? @upload

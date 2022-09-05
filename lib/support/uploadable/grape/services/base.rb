@@ -29,3 +29,4 @@ module Support
 end
 
 require_relative "./uploads"
+require_relative "./uploadable_uploads"

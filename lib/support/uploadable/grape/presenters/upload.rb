@@ -18,6 +18,9 @@ module Support
           expose :original_file_name do |res|
             res.file.try :original_filename
           end
+          expose :file_extension do |res|
+            res.file.try :extension
+          end
           expose :metadata
           expose :file_data do |res|
             JSON.parse(res.file_data) rescue {}
