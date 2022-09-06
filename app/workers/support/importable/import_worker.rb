@@ -10,7 +10,7 @@ module Support
         sidekiq_options :queue => Support.importable.sidekiq_queue, retry: 1, backtrace: Rails.env.development?? 20 : 1
 
       end
-      
+
       attr_accessor :id
       class_attribute :model
 
